@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClaudeCube</title>
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- CDN-only dependency map: no bundler is required for local development. -->
     <script type="importmap">
     {
         "imports": {
@@ -16,6 +18,7 @@
 </head>
 <body>
     <div class="app">
+        <!-- App identity and short product description. -->
         <header class="app-header">
             <div class="header-brand">
                 <div class="header-cube-icon">
@@ -33,9 +36,12 @@
         </header>
 
         <main class="app-main">
+            <!-- Three.js owns the canvas; overlay UI sits above it in normal DOM. -->
             <section class="cube-viewport">
                 <canvas id="cube-canvas"></canvas>
                 <div class="viewport-hint">Drag to rotate &nbsp;·&nbsp; Scroll to zoom</div>
+
+                <!-- Updated during Kociemba solve animation to explain the active phase. -->
                 <div class="phase-overlay" id="phase-overlay" hidden>
                     <div class="phase-banner">
                         <span class="phase-tag" id="phase-tag">Phase 1</span>
@@ -45,12 +51,14 @@
                 </div>
             </section>
 
+            <!-- Controls and readouts are kept outside the canvas for accessible DOM state. -->
             <aside class="sidebar">
                 <div class="status-bar">
                     <span class="status-dot" id="status-dot"></span>
                     <span class="status-text" id="status-text">Ready</span>
                 </div>
 
+                <!-- Live counters updated by js/main.js. -->
                 <div class="stats-row">
                     <div class="stat-card">
                         <span class="stat-value" id="move-count">0</span>
@@ -66,6 +74,7 @@
                     </div>
                 </div>
 
+                <!-- Main cube actions. Buttons are disabled while animations are running. -->
                 <div class="control-buttons">
                     <button class="btn btn-scramble" id="btn-scramble">
                         <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -92,6 +101,7 @@
                     </button>
                 </div>
 
+                <!-- Move history doubles as solve output after Kociemba returns a sequence. -->
                 <div class="history-panel">
                     <div class="history-header">
                         <h3>Move History</h3>
@@ -102,6 +112,7 @@
                     </div>
                 </div>
 
+                <!-- Mapped in MoveEngine to per-quarter-turn animation durations. -->
                 <div class="speed-panel">
                     <label for="speed-slider">Animation Speed</label>
                     <div class="slider-row">
