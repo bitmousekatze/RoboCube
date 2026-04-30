@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClaudeCube</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.162.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.162.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="app">
+        <header class="app-header">
+            <div class="header-brand">
+                <div class="header-cube-icon">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                        <rect x="2" y="10" width="16" height="16" rx="2" fill="#667eea"/>
+                        <rect x="12" y="4" width="16" height="16" rx="2" fill="#764ba2" opacity="0.85"/>
+                        <rect x="18" y="16" width="16" height="16" rx="2" fill="#5a6fd6" opacity="0.7"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>ClaudeCube</h1>
+                    <p>Rubik's Cube Scrambler &amp; Solver</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <section class="cube-viewport">
+                <canvas id="cube-canvas"></canvas>
+                <div class="viewport-hint">Drag to rotate &nbsp;·&nbsp; Scroll to zoom</div>
+                <div class="phase-overlay" id="phase-overlay" hidden>
+                    <div class="phase-banner">
+                        <span class="phase-tag" id="phase-tag">Phase 1</span>
+                        <span class="phase-desc" id="phase-desc"></span>
+                    </div>
+                    <div class="phase-callout" id="phase-callout"></div>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <div class="status-bar">
+                    <span class="status-dot" id="status-dot"></span>
+                    <span class="status-text" id="status-text">Ready</span>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <span class="stat-value" id="move-count">0</span>
+                        <span class="stat-label">Moves</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="solve-time">—</span>
+                        <span class="stat-label">Time</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="scramble-moves">—</span>
+                        <span class="stat-label">Scramble</span>
+                    </div>
+                </div>
+
+                <div class="control-buttons">
+                    <button class="btn btn-scramble" id="btn-scramble">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 1l4 4-4 4"/>
+                            <path d="M3 11V9a4 4 0 014-4h14"/>
+                            <path d="M7 23l-4-4 4-4"/>
+                            <path d="M21 13v2a4 4 0 01-4 4H3"/>
+                        </svg>
+                        Scramble
+                    </button>
+                    <button class="btn btn-reset" id="btn-reset">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/>
+                            <path d="M3 3v5h5"/>
+                        </svg>
+                        Reset
+                    </button>
+                    <button class="btn btn-solve" id="btn-solve">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 8v4l3 3"/>
+                        </svg>
+                        Solve
+                    </button>
+                </div>
+
+                <div class="history-panel">
+                    <div class="history-header">
+                        <h3>Move History</h3>
+                        <button class="btn-clear-history" id="btn-clear-history" title="Clear history">✕</button>
+                    </div>
+                    <div class="history-list" id="history-list">
+                        <p class="history-empty">No moves yet</p>
+                    </div>
+                </div>
+
+                <div class="speed-panel">
+                    <label for="speed-slider">Animation Speed</label>
+                    <div class="slider-row">
+                        <span>Slow</span>
+                        <input type="range" id="speed-slider" min="1" max="5" value="3" class="speed-slider">
+                        <span>Fast</span>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
