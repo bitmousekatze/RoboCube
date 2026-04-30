@@ -35,6 +35,7 @@ const phaseCallout  = document.getElementById('phase-callout');
 const SCRAMBLE_BATCH = 25;
 const SCRAMBLE_CAP   = 420;
 
+// Short text for the in-viewport Kociemba teaching overlay.
 const PHASE_INFO = {
     1: 'Orient corners & edges, place E-slice edges. Any face turn allowed.',
     2: 'Solve within ⟨U, D, L², R², F², B²⟩ — these moves preserve all orientation.',
@@ -136,12 +137,14 @@ btnScramble.addEventListener('click', () => {
     const remaining = SCRAMBLE_CAP - existing;
     const batch     = Math.min(SCRAMBLE_BATCH, remaining);
 
+    // Seed generation with the existing tail so appended batches avoid bad joins.
     const last       = existing > 0 ? cube.moveHistory[existing - 1][0] : '';
     const secondLast = existing > 1 ? cube.moveHistory[existing - 2][0] : '';
     const sequence = generateScramble(batch, last, secondLast);
 
     scrambleMoves.textContent = existing + sequence.length;
 
+    // MoveEngine is the sync point: every visual turn is mirrored logically.
     engine.onMoveStart = (move) => {
         cube.addMove(move);
         logical.apply(move);
@@ -231,6 +234,7 @@ btnSolve.addEventListener('click', async () => {
     solveStartTime = performance.now();
     const phase2Start = findPhase2Start(solution);
 
+    // During solve, the visible history is the solver's answer, not the scramble.
     engine.onMoveStart = (move) => {
         const moveIdx = cube.moveHistory.length;
         const phase = moveIdx >= phase2Start ? 2 : 1;

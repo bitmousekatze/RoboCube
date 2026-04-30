@@ -12,6 +12,7 @@ export const STICKER_COLORS = {
     B: 0x0045ad,  // Blue   - Back
 };
 
+// UI-facing state only. The solver's authoritative cube state lives in solver.js.
 export class CubeState {
     constructor() {
         this.moveHistory = [];

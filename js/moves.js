@@ -35,6 +35,8 @@ export function generateScramble(length = 25, prevLastFace = '', prevSecondLastF
     const faces = ['U', 'D', 'L', 'R', 'F', 'B'];
     const variants = ['', "'", '2'];
     const out = [];
+
+    // Previous faces may come from an earlier scramble batch.
     let lastFace = prevLastFace;
     let secondLastFace = prevSecondLastFace;
     for (let i = 0; i < length; i++) {
@@ -111,7 +113,7 @@ export class MoveEngine {
             c => c.userData?.isCubie && Math.abs(c.position[axis] - layer) < 0.4
         );
 
-        // Create pivot at cube origin
+        // Attach preserves each cubie's world transform while moving it under the pivot.
         const pivot = new THREE.Group();
         pivot.userData.isPivot = true;
         this.cubeGroup.add(pivot);

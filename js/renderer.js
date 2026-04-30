@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { STICKER_COLORS } from './cube.js';
 
+// Dimensions are slightly under one grid unit so the black cubie gaps remain visible.
 const CUBIE_SIZE   = 0.91;
 const STICKER_SIZE = 0.76;
 const UNIT         = 1.0;   // center-to-center spacing
@@ -88,6 +89,7 @@ export class CubeRenderer {
         const cubie = new THREE.Group();
         cubie.position.set(gx * UNIT, gy * UNIT, gz * UNIT);
         cubie.userData.isCubie = true;
+        // Reset uses the home transform instead of solving the visual cube backward.
         cubie.userData.home = {
             position: cubie.position.clone(),
             quaternion: cubie.quaternion.clone(),
@@ -149,6 +151,7 @@ export class CubeRenderer {
         const sticker = new THREE.Mesh(geo, mat);
 
         const L = STICKER_LIFT;
+        // Sticker planes start facing +Z, then rotate onto each exposed cubie side.
         switch (face) {
             case 'R': sticker.position.set( L,  0,  0); sticker.rotation.y =  Math.PI / 2; break;
             case 'L': sticker.position.set(-L,  0,  0); sticker.rotation.y = -Math.PI / 2; break;
