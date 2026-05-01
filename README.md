@@ -94,6 +94,10 @@ Loaded in the browser through the import map:
 - [Three.js](https://threejs.org/) `0.162.0`
 - [cubejs](https://www.npmjs.com/package/cubejs) `1.3.2`
 
+## License
+
+RoboCube is available under the [MIT License](LICENSE), so anyone can use, copy, modify, and distribute it.
+
 ## Development Notes
 
 - Keep the visual cube and logical cube mirrored through `engine.onMoveStart`.
