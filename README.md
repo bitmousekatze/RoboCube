@@ -1,6 +1,6 @@
-# ClaudeCube
+# RoboCube
 
-ClaudeCube is a browser-based 3D Rubik's Cube scrambler and solver. It renders an interactive cube with Three.js, lets you build up scrambles in batches, and solves the current cube state with a Kociemba two-phase solver through `cubejs`.
+RoboCube is a browser-based 3D Rubik's Cube scrambler and solver. It renders an interactive cube with Three.js, lets you build up scrambles in batches, and solves the current cube state with a Kociemba two-phase solver through `cubejs`.
 
 The project is intentionally simple to run: vanilla HTML, CSS, and JavaScript with ES modules loaded from CDNs. There is no build step.
 
@@ -43,7 +43,7 @@ npx serve -p 8766 .
 ## Project Structure
 
 ```text
-ClaudeCube/
+RoboCube/
 ├── index.html       # Main app layout and import map
 ├── css/
 │   └── styles.css   # Dark glass UI, layout, controls, phase overlay
@@ -58,7 +58,7 @@ ClaudeCube/
 
 ## How It Works
 
-ClaudeCube keeps two cube representations in sync:
+RoboCube keeps two cube representations in sync:
 
 - The **visual cube** is made of 27 cubies in a Three.js scene. Face turns are animated by attaching the affected cubies to a temporary pivot group, rotating that group, then snapping the cubies back to the grid.
 - The **logical cube** is a `cubejs` cube instance. Every animated move is mirrored into it so the solver always knows the real puzzle state.
@@ -74,7 +74,7 @@ Kociemba's algorithm solves the cube in two broad phases:
 - **Phase 1:** orient corners and edges, and place E-slice edges. Any face turn may appear.
 - **Phase 2:** finish solving using moves that preserve orientation: `U`, `U'`, `U2`, `D`, `D'`, `D2`, `L2`, `R2`, `F2`, and `B2`.
 
-ClaudeCube detects the Phase 2 boundary by scanning the returned solution for the first suffix where every remaining move belongs to that Phase 2 move set. During solving, the overlay shows the active phase and current move progress.
+RoboCube detects the Phase 2 boundary by scanning the returned solution for the first suffix where every remaining move belongs to that Phase 2 move set. During solving, the overlay shows the active phase and current move progress.
 
 ## Correctness Checks
 
